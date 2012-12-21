@@ -1,14 +1,14 @@
 # Maintainer: Nekolyanich <gmail@nekolyanich.com>
-pkgname=python2-psh
-pkgver=0.2.2
+pkgname=python2-psys
+pkgver=0.1
 pkgrel=1
-pkgdesc="psh allows you to spawn processes in Unix shell-style way"
+pkgdesc="A Python module with a set of basic tools for writing system utilities"
 arch=("i686" "x86_64")
-url="http://konishchevdmitry.github.com/psh/"
+url="http://github.com/KonishchevDmitry/psys"
 license=("GPL3")
 depends=("python2")
 makedepends=("git")
-provides=("python2-psh")
+provides=("python2-psys")
 conflicts=()
 replaces=()
 backup=()
@@ -16,8 +16,8 @@ options=(!emptydirs)
 source=()
 md5sums=()
 
-_gitroot="git://github.com/KonishchevDmitry/psh.git"
-_gitname="psh"
+_gitroot="git://github.com/KonishchevDmitry/psys.git"
+_gitname="psys"
 
 build () {
   cd "$srcdir"
@@ -38,6 +38,5 @@ build () {
   cd "$srcdir/$_gitname-build"
   python2 setup.py install --root="$pkgdir/" --optimize=1
 }
-
 
 # vim:set ts=2 sw=2 et:

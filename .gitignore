@@ -1,4 +1,4 @@
+/build
+/dist
+/psys.egg-info
 /.vim
-/doc/_build
-/psh.egg-info
-/test-env
