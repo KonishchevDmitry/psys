@@ -1,7 +1,7 @@
 %{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")}
 
 Name:    python-psys
-Version: 0.1
+Version: 0.1.1
 Release: 1%{?dist}
 Summary: A Python module with a set of basic tools for writing system utilities
 
@@ -41,6 +41,10 @@ find %buildroot/ -name '*.egg-info' -exec rm -rf -- '{}' '+'
 %clean
 [ %buildroot = "/" ] || rm -rf %buildroot
 
+
+%changelog
+* Thu Jun 27 2013 Dmitry Konishchev <konishchev@gmail.com> - 0.1.1-1
+- New version.
 
 %changelog
 * Thu Dec 20 2012 Dmitry Konishchev <konishchev@gmail.com> - 0.1-1
