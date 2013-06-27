@@ -22,6 +22,18 @@ class _Poll(object):
     POLLOUT = 2
     """Available for write."""
 
+    POLLHUP = 4
+    """Hang up happened.
+
+    Notice: epoll always wait for this event.
+    """
+
+    POLLERR = 8
+    """Error condition happened.
+
+    Notice: epoll always wait for this event.
+    """
+
 
     def __del__(self):
         self.close()
@@ -107,6 +119,12 @@ if hasattr(select, "epoll"):
 
                 if epoll_flags & select.EPOLLOUT:
                     flags |= self.POLLOUT
+
+                if epoll_flags & select.EPOLLHUP:
+                    flags |= self.POLLHUP
+
+                if epoll_flags & select.EPOLLERR:
+                    flags |= self.POLLERR
 
                 events.append(( fd, flags ))
 
