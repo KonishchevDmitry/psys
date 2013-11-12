@@ -1,3 +1,7 @@
+-------------
+ * psys.daemon module.
+
+
 Version 0.1.1
 -------------
  * psys.poll: handle missing EPOLLHUP and EPOLLERR.

@@ -25,6 +25,14 @@ STDERR_FILENO = 2
 """Standard error output descriptor."""
 
 
+class Error(Exception):
+    """The base class for all exceptions that our code throws."""
+
+    def __init__(self, *args, **kwargs):
+        message, args = str(args[0]), args[1:]
+        super(Error, self).__init__(
+            message.format(*args, **kwargs) if args or kwargs else message)
+
 
 def b(string):
     """Converts a unicode string to a byte string in the system encoding.
