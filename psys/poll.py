@@ -43,7 +43,7 @@ class _Poll(object):
         """Closes the object."""
 
 
-    def poll(self, timeout = None):
+    def poll(self, timeout=None):
         """Waits for events."""
 
         raise Exception("Not implemented")
@@ -83,7 +83,7 @@ if hasattr(select, "epoll"):
                     self.__epoll = None
 
 
-        def poll(self, timeout = None):
+        def poll(self, timeout=None):
             """Waits for events."""
 
             if self.__epoll is None:
@@ -162,7 +162,7 @@ else:
             self.__wlist = []
 
 
-        def poll(self, timeout = None):
+        def poll(self, timeout=None):
             """Waits for events."""
 
             if timeout is not None:

@@ -48,7 +48,7 @@ def b(string):
         raise TypeError("Invalid object type")
 
 
-def close_all_fds(except_fds = [ STDIN_FILENO, STDOUT_FILENO, STDERR_FILENO ]):
+def close_all_fds(except_fds=[STDIN_FILENO, STDOUT_FILENO, STDERR_FILENO]):
     """Closes all opened file descriptors."""
 
     if platform.system() == "Darwin":
@@ -108,7 +108,7 @@ def is_errno(error, errnos):
         return error.errno == errnos
 
 
-def join_thread(thread, timeout = None):
+def join_thread(thread, timeout=None):
     """Joins the thread. Returns True if the thread terminated."""
 
     # Useful in 'finally'
