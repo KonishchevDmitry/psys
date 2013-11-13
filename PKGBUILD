@@ -1,6 +1,6 @@
 # Maintainer: Nekolyanich <gmail@nekolyanich.com>
 pkgname=python2-psys
-pkgver=0.1.1
+pkgver=0.2
 pkgrel=1
 pkgdesc="A Python module with a set of basic tools for writing system utilities"
 arch=("i686" "x86_64")
