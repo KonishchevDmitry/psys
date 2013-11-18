@@ -1,6 +1,5 @@
 include ChangeLog
 include INSTALL
 include Makefile
-include PKGBUILD
 include python-psys.spec
 include README
