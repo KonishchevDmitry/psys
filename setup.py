@@ -8,7 +8,7 @@ if __name__ == "__main__":
     with open("README") as readme:
         setup(
             name = "psys",
-            version = "0.2",
+            version = "0.3",
 
             description = readme.readline().strip(),
             long_description = readme.read().strip() or None,
@@ -31,5 +31,6 @@ if __name__ == "__main__":
             ],
             platforms = [ "unix", "linux", "osx" ],
 
+            install_requires = [ "pcore" ],
             packages = find_packages(),
         )

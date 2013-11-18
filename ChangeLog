@@ -1,3 +1,8 @@
+Version 0.3
+-----------
+ * pcore has been separated to an independent package
+
+
 Version 0.2
 -----------
  * psys.daemon module

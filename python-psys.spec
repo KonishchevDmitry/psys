@@ -1,7 +1,7 @@
 %{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")}
 
 Name:    python-psys
-Version: 0.2
+Version: 0.3
 Release: 1%{?dist}
 Summary: A Python module with a set of basic tools for writing system utilities
 
@@ -13,7 +13,7 @@ Source:  http://pypi.python.org/packages/source/p/psys/psys-%{version}.tar.gz
 BuildArch:     noarch
 BuildRequires: python-setuptools
 
-Provides: python-pcore
+Requires: python-pcore
 
 %description
 A Python module with a set of basic tools for writing system utilities
@@ -36,7 +36,6 @@ A Python module with a set of basic tools for writing system utilities
 %files
 %defattr(-,root,root,-)
 
-%python_sitelib/pcore
 %python_sitelib/psys
 %python_sitelib/psys-*.egg-info
 
@@ -46,6 +45,9 @@ A Python module with a set of basic tools for writing system utilities
 
 
 %changelog
+* Mon Nov 18 2013 Dmitry Konishchev <konishchev@gmail.com> - 0.3-1
+- New version
+
 * Wed Nov 13 2013 Dmitry Konishchev <konishchev@gmail.com> - 0.2-1
 - New version
 
