@@ -3,6 +3,7 @@
 import errno
 import fcntl
 import os
+import signal
 import stat
 import sys
 
@@ -94,3 +95,34 @@ def write_pidfile(fd):
         size = os.write(fd, data)
         data = data[size:]
     os.ftruncate(fd, datalen)
+
+
+def daemonize(do_fork=True, skip_fds=[]):
+    """Daemonizes current process."""
+
+    if do_fork:
+        if os.fork():
+            os._exit(0)
+        else:
+            os.setsid()
+
+            if os.fork():
+                os._exit(0)
+
+    os.chdir("/")
+    os.umask(0)
+
+    signal.signal(signal.SIGHUP, signal.SIG_IGN)
+    signal.siginterrupt(signal.SIGHUP, False)
+
+    # Redirecting stdout and stderr to the log file and
+    # closing the original stdin.
+    # -->
+    null_dev = eintr_retry(os.open)("/dev/null", os.O_RDWR)
+    try:
+        for fd in [sys.stdin.fileno(), sys.stdout.fileno(), sys.stderr.fileno()]:
+            if fd not in skip_fds:
+                os.dup2(null_dev, fd)
+    finally:
+        eintr_retry(os.close)(null_dev)
+    # <--
