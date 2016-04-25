@@ -3,6 +3,7 @@
 from __future__ import unicode_literals
 
 from pcore import bytes, str, range
+from pcore import constants
 
 import collections
 import errno
@@ -119,7 +120,7 @@ def join_thread(thread, timeout=None):
         # Python is buggy: if we simply join a thread in the main thread
         # without a timeout, we will never receive any UNIX signal.
         while thread.isAlive():
-            thread.join(float(24 * 60 * 60))
+            thread.join(float(constants.DAY_SECONDS))
 
         return True
     else:
