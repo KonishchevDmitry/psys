@@ -53,18 +53,18 @@ A Python module with a set of basic tools for writing system utilities
 
 
 %build
-%{__python2} setup.py build
+make PYTHON=%{__python2}
 %if 0%{with python3}
-%{__python3} setup.py build
+make PYTHON=%{__python3}
 %endif  # with python3
 
 
 %install
 [ "%buildroot" = "/" ] || rm -rf "%buildroot"
 
-%{__python2} setup.py install -O1 --skip-build --root "%buildroot"
+make PYTHON=%{__python2} INSTALL_FLAGS="-O1 --root '%buildroot'" install
 %if 0%{with python3}
-%{__python3} setup.py install -O1 --skip-build --root "%buildroot"
+make PYTHON=%{__python3} INSTALL_FLAGS="-O1 --root '%buildroot'" install
 %endif  # with python3
 
 
