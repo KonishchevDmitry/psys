@@ -82,3 +82,15 @@ def release_pidfile(path, fd):
         eintr_retry(os.unlink)(path)
     finally:
         eintr_retry(os.close)(fd)
+
+
+def write_pidfile(fd):
+    """Write pid to pidfile previously allocated by acquire_pidfile()"""
+
+    data = str(os.getpid())
+    datalen = len(data)
+
+    while data:
+        size = os.write(fd, data)
+        data = data[size:]
+    os.ftruncate(fd, datalen)
