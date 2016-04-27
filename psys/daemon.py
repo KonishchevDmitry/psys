@@ -92,9 +92,9 @@ def write_pidfile(fd):
     datalen = len(data)
 
     while data:
-        size = os.write(fd, data)
+        size = eintr_retry(os.write)(fd, data)
         data = data[size:]
-    os.ftruncate(fd, datalen)
+    eintr_retry(os.ftruncate)(fd, datalen)
 
 
 def daemonize(do_fork=True, skip_fds=[]):
