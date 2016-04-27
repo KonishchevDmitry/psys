@@ -115,9 +115,8 @@ def daemonize(do_fork=True, skip_fds=[]):
     signal.signal(signal.SIGHUP, signal.SIG_IGN)
     signal.siginterrupt(signal.SIGHUP, False)
 
-    # Redirecting stdout and stderr to the log file and
-    # closing the original stdin.
-    # -->
+    # Redirecting standard streams to /dev/null and
+    # closing original descriptors -->
     null_dev = eintr_retry(os.open)("/dev/null", os.O_RDWR)
     try:
         for fd in [sys.stdin.fileno(), sys.stdout.fileno(), sys.stderr.fileno()]:
