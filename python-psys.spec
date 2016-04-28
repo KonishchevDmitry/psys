@@ -16,7 +16,7 @@
 %define project_name psys
 
 Name:    python-%project_name
-Version: 0.3
+Version: 0.4
 Release: 1%{?dist}
 Summary: A Python module with a set of basic tools for writing system utilities
 
