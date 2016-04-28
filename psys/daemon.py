@@ -94,6 +94,7 @@ def write_pidfile(fd):
     while data:
         size = eintr_retry(os.write)(fd, data)
         data = data[size:]
+
     eintr_retry(os.ftruncate)(fd, datalen)
 
 
@@ -115,13 +116,11 @@ def daemonize(do_fork=True, skip_fds=[]):
     signal.signal(signal.SIGHUP, signal.SIG_IGN)
     signal.siginterrupt(signal.SIGHUP, False)
 
-    # Redirecting standard streams to /dev/null and
-    # closing original descriptors -->
+    # Redirecting standard streams to /dev/null and closing original descriptors
     null_dev = eintr_retry(os.open)("/dev/null", os.O_RDWR)
     try:
-        for fd in [sys.stdin.fileno(), sys.stdout.fileno(), sys.stderr.fileno()]:
+        for fd in (sys.stdin.fileno(), sys.stdout.fileno(), sys.stderr.fileno()):
             if fd not in skip_fds:
                 os.dup2(null_dev, fd)
     finally:
         eintr_retry(os.close)(null_dev)
-    # <--

@@ -6,9 +6,7 @@ import os
 
 from psys import eintr_retry
 
-
-LOG = logging.getLogger(__name__)
-"""Logger instance."""
+log = logging.getLogger(__name__)
 
 
 class Pipe(object):
@@ -42,7 +40,7 @@ class Pipe(object):
             try:
                 eintr_retry(os.close)(self.read)
             except Exception as e:
-                LOG.error("Unable to close a pipe: %s.", e)
+                log.error("Unable to close a pipe: %s.", e)
             else:
                 self.read = None
 
@@ -50,6 +48,6 @@ class Pipe(object):
             try:
                 eintr_retry(os.close)(self.write)
             except Exception as e:
-                LOG.error("Unable to close a pipe: %s.", e)
+                log.error("Unable to close a pipe: %s.", e)
             else:
                 self.write = None

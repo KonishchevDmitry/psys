@@ -1,71 +1,68 @@
+"""Various process-related functions."""
+
 import logging
 import os
 import signal
 
+log = logging.getLogger(__name__)
 
-LOG = logging.getLogger(__name__)
-"""Logger instance."""
+_TERMINATION_SIGNAL_HANDLERS = []
+"""UNIX signal handlers that was added by add_terminate_signal_handler()."""
 
-_TERMINATE_SIGNAL_HANDLERS = []
-"""
-SIGINT, SIGQUIT and SIGTERM handlers that was added by
-add_terminate_signal_handler().
-"""
-
-_END_WORK_SIGNAL_RECEIVED = False
-"""True, if the program received end work UNIX signal."""
+_TERMINATION_SIGNAL_RECEIVED = False
+"""True if the program received a termination UNIX signal."""
 
 
 def add_terminate_signal_handler(handler):
-    """Sets a handler for SIGINT, SIGQUIT and SIGTERM signals."""
+    """Adds a handler for SIGINT, SIGQUIT and SIGTERM signals."""
 
-    _TERMINATE_SIGNAL_HANDLERS.append(handler)
+    _TERMINATION_SIGNAL_HANDLERS.append(handler)
     return handler
 
 
 def remove_terminate_signal_handler(handler):
-    """Removes handler added by add_terminate_signal_handler()."""
+    """Removes a handler added by add_terminate_signal_handler()."""
 
-    _TERMINATE_SIGNAL_HANDLERS.remove(handler)
+    _TERMINATION_SIGNAL_HANDLERS.remove(handler)
 
 
 def end_work_signal_received():
-    """Returns True if the program received end work UNIX signal."""
+    """Returns True if the program received termination UNIX signal."""
 
-    return _END_WORK_SIGNAL_RECEIVED
+    return _TERMINATION_SIGNAL_RECEIVED
 
 
-def __signal_handler(signum, stack):
+def _signal_handler(signum, stack):
     """Handler for the UNIX signals."""
 
-    LOG.info("Program received deadly UNIX signal [%s].", signum)
+    log.info("Got a termination UNIX signal [%s].", signum)
 
-    global _END_WORK_SIGNAL_RECEIVED
-    _END_WORK_SIGNAL_RECEIVED = True
+    global _TERMINATION_SIGNAL_RECEIVED
+    _TERMINATION_SIGNAL_RECEIVED = True
 
-    if _TERMINATE_SIGNAL_HANDLERS:
-        for handler in _TERMINATE_SIGNAL_HANDLERS:
+    if _TERMINATION_SIGNAL_HANDLERS:
+        for handler in _TERMINATION_SIGNAL_HANDLERS:
             try:
-                LOG.info("Calling terminate UNIX signal handler %s...", handler)
+                log.debug("Calling termination UNIX signal handler %s...", handler)
                 handler()
             except Exception as e:
-                LOG.error("Error while calling a terminate signal handler: %s.", e)
+                log.error("Error while calling a termination signal handler: %s.", e)
 
 
 def init(handle_unix_signals=True):
     """
     Starts the UNIX signals handling.
-    When the program gets a signal the corresponding signal handlers is invoked.
+    When the program gets a signal the corresponding signal handlers are invoked.
     """
 
     if handle_unix_signals:
-        signal.signal(signal.SIGINT, __signal_handler)
+        signal.signal(signal.SIGINT, _signal_handler)
         signal.siginterrupt(signal.SIGINT, False)
 
-        signal.signal(signal.SIGQUIT, __signal_handler)
+        signal.signal(signal.SIGQUIT, _signal_handler)
         signal.siginterrupt(signal.SIGQUIT, False)
 
-        signal.signal(signal.SIGTERM, __signal_handler)
+        signal.signal(signal.SIGTERM, _signal_handler)
         signal.siginterrupt(signal.SIGTERM, False)
 
         signal.siginterrupt(signal.SIGCHLD, False)
