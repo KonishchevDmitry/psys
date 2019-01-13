@@ -5,7 +5,7 @@ INSTALL_FLAGS ?=
 
 NAME          := psys
 RPM_NAME      := python-$(NAME)
-VERSION       := 0.3
+VERSION       := $(shell $(PYTHON) setup.py --version)
 
 build:
 	$(PYTHON) setup.py build
