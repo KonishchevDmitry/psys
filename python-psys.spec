@@ -16,7 +16,7 @@
 %define project_name psys
 
 Name:    python-%project_name
-Version: 0.3
+Version: 0.4
 Release: 1%{?dist}
 Summary: A Python module with a set of basic tools for writing system utilities
 
@@ -88,6 +88,11 @@ make PYTHON=%{__python3} INSTALL_FLAGS="-O1 --root '%buildroot'" install
 
 
 %changelog
+* Thu Apr 28 2016 Dmitry Konishchev <konishchev@gmail.com> - 0.4-1
+- Add psys.pipe module
+- Add psys.process module
+- Add psys.daemon.write_pidfile() and psys.daemonize() functions
+
 * Mon Nov 18 2013 Dmitry Konishchev <konishchev@gmail.com> - 0.3-1
 - New version
 

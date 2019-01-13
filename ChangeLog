@@ -1,3 +1,10 @@
+Version 0.4
+-----------
+ * psys.pipe module
+ * psys.process module
+ * psys.daemon.write_pidfile() and psys.daemonize() functions
+
+
 Version 0.3
 -----------
  * pcore has been separated to an independent package
