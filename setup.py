@@ -8,20 +8,20 @@ if __name__ == "__main__":
     with open("README") as readme:
         setup(
             name = "psys",
-            version = "0.4",
+            version = "0.4.1",
 
             description = readme.readline().strip(),
             long_description = readme.read().strip() or None,
             url = "http://github.com/KonishchevDmitry/psys",
 
-            license = "GPL3",
+            license = "MIT",
             author = "Dmitry Konishchev",
             author_email = "konishchev@gmail.com",
 
             classifiers = [
                 "Development Status :: 4 - Beta",
                 "Intended Audience :: Developers",
-                "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+                "License :: OSI Approved :: MIT License",
                 "Operating System :: MacOS :: MacOS X",
                 "Operating System :: POSIX",
                 "Operating System :: Unix",

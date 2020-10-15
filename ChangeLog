@@ -1,3 +1,8 @@
+Version 0.4.1
+-----------
+ * Change licence to more permissive (MIT)
+
+
 Version 0.4
 -----------
  * psys.pipe module
