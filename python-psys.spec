@@ -28,7 +28,7 @@ Release: 2%{?dist}
 Summary: A Python module with a set of basic tools for writing system utilities
 
 Group:   Development/Languages
-License: GPLv3
+License: MIT
 URL:     http://github.com/KonishchevDmitry/%project_name
 Source:  http://pypi.python.org/packages/source/p/%project_name/%project_name-%{version}.tar.gz
 
