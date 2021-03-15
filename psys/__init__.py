@@ -119,7 +119,7 @@ def join_thread(thread, timeout=None):
     if timeout is None:
         # Python is buggy: if we simply join a thread in the main thread
         # without a timeout, we will never receive any UNIX signal.
-        while thread.isAlive():
+        while thread.is_alive():
             thread.join(float(constants.DAY_SECONDS))
 
         return True
@@ -127,7 +127,7 @@ def join_thread(thread, timeout=None):
         if timeout >= 0:
             thread.join(float(timeout))
 
-        return thread.isAlive()
+        return thread.is_alive()
 
 
 def u(string):
