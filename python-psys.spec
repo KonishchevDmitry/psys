@@ -23,8 +23,8 @@
 A Python module with a set of basic tools for writing system utilities}
 
 Name:    python-%project_name
-Version: 0.4
-Release: 2%{?dist}
+Version: 0.4.2
+Release: 1%{?dist}
 Summary: A Python module with a set of basic tools for writing system utilities
 
 Group:   Development/Languages
@@ -116,6 +116,9 @@ make PYTHON=%{__python3_other} INSTALL_FLAGS="-O1 --root '%buildroot'" install
 
 
 %changelog
+* Mon Mar 15 2021 Dmitry Konishchev <konishchev@gmail.com> - 0.4.2-1
+- New version
+
 * Sun Jan 13 2019 Mikhail Ushanov <gm.mephisto@gmail.com> - 0.4-2
 - Add python3 package build for EPEL
 
